@@ -1,0 +1,121 @@
+
+### Installed ###
+
+chrome 		# browser
+vlc		# all in one media player
+transmission	# lightweight torrent client
+homebrew	# to install linux packages # http://brew.sh/
+disk inventory x # disk usage analyzer
+pushbullet	# pushbullet android via itune
+google drive	# drive folder files sync
+dropbox		# dropbox folder files sync
+jre8		# java runtime environment, for octave, didn't work with brew
+androidFileTransfer 	# to transfer files to android phone
+iterm2		# improved terminal, with hot key dropdown support
+hex fiend	# hex editor 
+adobe flash plugin	# flash plugin for safari
+steam		# steam player for games
+spectacle	# move and resize windows with keyboard
+onenote		# microsoft onenote
+the unarchiver	# 7zip rar unarchive unzip tar gz
+team Viewer	# team viewer, screen sharing, remote desktop control
+calibre		# read convert ebooks epub mobi
+adb			# android adb 
+fastboot	# android fastboot
+audacity	# digital audio editor, recorder and mixer
+celestia	# view solar system, flyby #astronomy 
+stellarium	# view star positions from surface of earth #astronomy
+google earth # google earth latest, with mars, moon, sky map 
+google earth browser plugin	# to view google earth 3d objects in browser
+meshlab		#processing and editing of unstructured 3D triangular meshes.
+gimp		# gimp images editer, photoshop alternative
+tracker		# video tracking tool, extract physics information from video frames by tracking objects
+torBrowser	# tor onion browser 
+sublime		# sublime text editor
+spotify		# free music application 
+tunnlebear	# internet proxy systemwide
+digital universe	# digital universe stars astronomy, # check and delete, directly copied to Application folder
+slower speed of light	# fun science game to visualise effect of slow speed of light
+eiskaltDC++	# DC++ for local lan sharing DC++ client
+pyCharm		# python IDE, ALL PYTHON TOOLS IN ONE PLACE
+
+#cracked#
+crossover	# run windows software through wine
+disk drill pro	# data recovery, recover deleted files, remove if found malware, or unwanted background services
+stellar phoenix # data recovery, rocever deleted files
+autocad		# create 2d 3d dwg drawings
+little snitch	# TCP Firewall to block outgoing incoming connections for any application
+*matlab		# MATLAB 2014b 
+mathematica # mathematica 10
+photoshop	# photo editing, creating
+lightroom	# photo enhancing, photo album management
+
+#to uninstall#
+HoRNDIS		# USB tethering driver for android internet sharing
+evernote 	# evernote, would prefer microsoft onenote
+kindle		# kindle to read shared books 
+amazon could drive	# to sinc send-to-kindle documents
+photoscapeX	# photo editing
+TCPBlock	# not compatible with El-Capitan; firewall, blocks outgoing traffic application wise
+wunderlist	# wunderlist android list client right side notification panel
+A slower speed of light	# a game based on special relativity with slow light speed
+robomongo	# MongoDB management tool
+
+## brew install ##
+python		# python 2.7.9
+python3		# python 3.4.3
+Caskroom/cask/java	# brew version of java, for octave
+octave 		# installed octave along with many dependencies, gnuplot with qt
+nmap		# port scanning 
+axel 		# downloading software 
+wget		# fetch files
+osxfuse		# for ntfs-3g dependency supporter
+ntfs-3g		# opensource ntfs partition hard drive writing support
+			# http://apple.stackexchange.com/questions/152661/write-to-ntfs-formated-drives-on-yosemite
+youtube-dl  # youtube video download
+            # youtube-dl -F, to list all formats
+            # youtube-dl -f 135+141, to select video and audio format and combine
+libav       # for avconv, video converter, also used by youtube-dl to convert audio file
+bino		# 3d movies/video player
+--python --qt vtk	# to install mayavi2, vtk is required with et
+# http://davematthew.blogspot.in/2013/10/installing-matplotlib-and-mayavi-on-mac.html
+wxmac		# dont know, requirement for mayavi2
+pstree		# ps tree forest parent child process tree of process list
+elasticsearch	# elastic search, data database search analyze, sorl uses elasticsearch as backend 
+
+##brew-uninstalled##
+mypaint		# Caskroom/cask/mypaint broken installed and removed
+mongodb		# database nosql
+
+## pip install ##
+virtualenv	# create,manage virtual environment for python
+virtualenvwrapper	# wrapper to organize and tab completion of virtualenv
+ipython		# python interactive console
+numpy		# numpy for numpy array
+configobj	#
+envisage	#
+mayavi		# mayavi2 for vtk scientific data visualisation tool, 3D visualisation.
+mechanize	# python browser, to automate web scraping.
+beautifulsoup4	# to parse html web page and extract information.
+scikit		# python library tools for data mining, big data analysis
+			# http://scikit-learn.org/stable/index.html
+
+
+## virtialenv ##
+# science #	# for science # pylab, numpy, scipy, matplotlib, ipython
+
+## pylab install guide ##
+https://joernhees.de/blog/2014/02/25/scientific-python-on-mac-os-x-10-9-with-homebrew/
+http://killtheyak.com/scientific-python/
+http://www.lowindata.com/2013/installing-scientific-python-on-mac-os-x/
+
+## installed as chrome app ##
+postman		# build test HTTP REST APIs GET PUT rest
+
+### Not Installed ###
+xcode		# apple development tool IDE
+google earth pro	# google earth locations GIS view, area perimeter measuring
+blender		#open source 3D creation suite. It supports the entirety of the 3D pipeline—modeling, rigging, animation, simulation, rendering, compositing and motion tracking, even video editing and game creation. 
+wings3d		#model and texture low to mid-range polygon models, 3D modeling.
+Enthought Canopy	#Scientific and Analytic Python Deployment with entegrated Analysis Environment, python, numpy, scipy, matplotlib, mayavi2, etc...
+postman		# build test HTTP REST APIs GET PUT rest

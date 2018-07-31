@@ -1,0 +1,5 @@
+hosts		/etc/		#host to ip mapping
+resolv.conf	/etc/		#dns resolution
+fstab		/etc/		#auto mount at startup
+.gtk-bookmarks	~/		#bookmarks for file browser
+

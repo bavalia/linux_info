@@ -1,0 +1,83 @@
+" Turn on line numbering. Turn it off with "set nonu" 
+set nu 
+
+" Set syntax on
+syntax on
+
+" Indent automatically depending on filetype
+filetype indent on
+" set autoindent
+set smartindent
+
+" tab width setting
+set tabstop=2
+set shiftwidth=2
+
+" expand tab to spaces"
+set expandtab
+
+" Case insensitive search
+set ic
+
+" Highlight search
+set hls
+
+" Wrap text instead of being on one line
+set lbr
+
+" Change colorscheme from default to delek
+" colorscheme delek
+" colorscheme molokai
+
+" Set spell check / to remove spell check 'set nospell'
+" set spell 
+
+" Set curser navigation with mouse click 
+set mouse=a
+
+
+"" sugestion by sahil #begin
+call plug#begin()
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+
+" Use Space-f for commenting
+Plug 'scrooloose/nerdcommenter'
+noremap <space>f :call NERDComment(0,"toggle")<CR>
+
+" Plugin for colorschemes
+Plug 'morhetz/gruvbox'
+"
+" " Better incremental search plugin
+Plug 'haya14busa/incsearch.vim'
+
+" Vim airline plugin
+Plug 'vim-airline/vim-airline'
+set laststatus=2
+" Dont do white space detection
+let g:airline#extensions#whitespace#enabled = 0
+
+" File explorer ( Bring up using <F2>)
+Plug 'scrooloose/nerdtree'
+map <F12> :NERDTreeToggle<CR>
+let g:NERDTreeWinPos = "right" " Open NerdTree on right side insted of left
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+" Color scheme
+Plug 'tomasr/molokai'
+let g:molokai_original = 1
+"
+Plug 'majutsushi/tagbar'
+map <F10> :TagbarToggle<CR>
+
+" Use tab to do completion
+Plug 'ervandew/supertab'
+
+Plug 'vectorstorm/vim-csyn'
+
+call plug#end()
+
+set background=dark
+colorscheme molokai
+
+" sahil #end

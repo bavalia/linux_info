@@ -1,0 +1,10 @@
+os		# to call os commands
+socket		# for networking function
+numpy		# for N-dimentional metrices, fast numerical operation
+scipy		# scintific functions implemetation on numpy data
+matplotlib	# to plot a function or graph
+pylab		# interface to matplotlib plotting library
+SimpleHTTPServer	# simple http request handler
+SymPy		# computer algebra system (CAS) like matematica, symbolic calculation
+
+

@@ -1,0 +1,41 @@
+sudo -i
+
+mkdir /mnt/work
+
+mkdir /mnt/work/boot
+
+mount /dev/sda6 /mnt/work
+mount -o bind /dev /mnt/work/dev
+mount -o bind /proc /mnt/work/proc
+cp /proc/mounts /mnt/work/etc/mtab
+
+chroot /mnt/work/ /bin/bash
+
+upgrade-from-grub-legacy
+
+
+### alternate (with /sys)
+
+#first, mount new install to /mnt/work
+sudo mount /dev/sda2 /mnt/work/
+
+mount -t proc proc /mnt/work/proc
+mount -t sysfs sys /mnt/work/sys
+mount -o bind /dev /mnt/work/dev
+
+chroot /mnt/work /bin/bash
+
+
+### alternate - detail (with /dev/pts and resolv.conf)
+
+sudo mkdir /mnt/work
+sudo mount /dev/sda2 /mnt/work/
+sudo mount -o bind /proc /mnt/work/proc
+sudo mount -o bind /dev /mnt/work/dev
+sudo mount -o bind /dev/pts /mnt/work/dev/pts
+sudo mount -o bind /sys /mnt/work/sys
+sudo cp /etc/resolv.conf /mnt/work/etc/resolve.conf
+sudo chroot /mnt/work /bin/bash
+
+
+

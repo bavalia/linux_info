@@ -1,0 +1,276 @@
+##### To Write #TODO #####
+http://spacemacs.org/doc/DOCUMENTATION
+http://spacemacs.org/doc/DOCUMENTATION.html#commands
+#DONE : global auto complete mode
+#TODO : Functino tracing back through tagbars or gtags or anything!!
+#DONE : one key compilation
+
+# Notes:
+    #Ref[1] Don't install package with "package-install",
+            if not used in config file gets deleted
+
+# Other Packages installed
+ox-pandoc   # export org file to plain markdown
+
+# configuration
+.spacemacs                              # configuration file
+spc f e R                               # load the configuration file
+dotspacemacs-configuration-layers       # list of layers to use; org, python
+dotspacemacs/user-config                # list of user config
+  ;; Make linums relative by default
+  (with-eval-after-load 'linum
+    (linum-relative-global-mode))
+
+  ;; Dired, Directory listing parameters
+  (setq dired-listing-switches "-alh")
+  ;; bash shell alies support
+  (setq shell-file-name "bash")
+  (setq shell-command-switch "-ic")
+  ;; compile key binding
+  (global-set-key (kbd "<f5>") 'compile)
+  ;; default mode based hook for compilation
+  (add-hook 'python-mode-hook
+            (lambda()
+              (set (make-local-variable 'compile-command)
+                   (concat "python " buffer-file-name))))
+
+  ;; Key binding Spc q q , for killing frame only while keeping server open
+  (evil-leader/set-key
+    "q q" 'spacemacs/frame-killer)
+
+  ;; org-mode agenda and TO-DO view with parent visible ( breadcrumbs )
+  (with-eval-after-load 'org-agenda
+    (add-to-list 'org-agenda-prefix-format '(todo . " %i %-12:c %(concat (org-format-outline-path (last (org-get-outline-path))) \" ->\") "))
+    (add-to-list 'org-agenda-prefix-format '(agenda . " %i %-12:c%?-12t% s %(concat (org-format-outline-path (last (org-get-outline-path))) \" ->\") ")))
+
+
+# start emacs in daemon mode, and window from commandline
+# https://medium.com/@bobbypriambodo/blazingly-fast-spacemacs-with-persistent-server-92260f2118b7
+emacsclient -n filename
+apropos-variable    # Check the variable in any package
+load-theme          # molokai,
+disable-theme       # spacemacs-dark
+enable-theme
+
+# emacs default shortcuts
+M-w      # copy # kill-ring-save
+C-y      # paste # yank
+M-m t E  # toggle evil mode (hybrid mode) with old emacs mode
+
+
+
+# Helm
+spc      # general shortcut, menu
+M-m      # general shortcut, menu #emacs default, works where space doesn't
+spc spc  # searchable command window
+spc r    # registers/rings/resume
+
+
+# Ido ???
+
+# Window Management
+spc (0-9)    # select window (0-9)
+C-w          # evil vim window menu (use this for vim practice)
+C-w C-w      # change window cyclic
+C-w [hjkl]   # change window to
+C-w o        # maximize/restore buffer
+or
+spc w        # window menu (Do not use this, use vim shorcut above)
+spc w [HJKL] # move window accordingly
+spc w [hjkl] # move to window accordigly
+spc w s/v    # split horizontaly/vertically
+spc w m      # maximize/restore buffer
+spc g t      # golden ratio, dynamically resize the windows
+z a          # toggle code folding
+z r          # open all folds
+z m          # close all folds
+
+# Buffer and Files
+spc tab  # switch between last two buffer
+spc b b  # swith to a buffer using Helm
+spc f f  # open file with Helm
+spc f r  # open recent file with Helm, like MRU in vim
+spc f j  # jump to dire of currnet buffer file
+spc f t  # neo file tree toggle, press (spc 0) to select neoTree window
+spc f y  # show and copy file name
+spc p p  # open project with Helm
+
+## Dired: default when startup for project management
+https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf
+spc a d  # open dired
+spc f j  # jump to currnet buffer file
+q        # quit
+v        # view current file as read only
+f        # visit current file
+o        # visit current file in other window
+g        # refresh the directory
+R        # rename or move
+D        # delete file
+^        # up to parent directory
+[</>]    # prev/next directory in list
+*        # open marking menu
+%        # regular expression menu,
+https://stackoverflow.com/questions/15881776/emacs-dired-rename-many-files
+
+## neo tree navigation
+spc f t  # toggle neo tree for any generic file
+spc p t  # toggle neo tree for any project
+spc 0    # select neo tree window
+
+# comment toggle
+spc c    # comment menu
+spc c l  # toggle single line, selected area comment
+spc c p  # toggle comment in paragraph separated by blank line
+spc c P  # toggle inverse comment in paragraph
+
+# Org Mode
+# Tutorial
+  # https://www.youtube.com/playlist?list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE
+http://ehneilsen.net/notebook/orgExamples/org-examples.html#sec-2-1
+  # header, infile scripting like calc, python, matplotlib, tables etc ...
+http://sachachua.com/blog/2008/01/tagging-in-org-plus-bonus-code-for-timeclocks-and-tags/
+# discussion and comparision of hyrarchical structure of organising thought
+https://news.ycombinator.com/item?id=11296843
+https://news.ycombinator.com/item?id=11311465
+    #TODO: learn about custom org mode from above link 11311465
+# add file to agenda tracking
+https://stackoverflow.com/questions/11384516/how-to-make-all-org-files-under-a-folder-added-in-agenda-list-automatically
+date-time preference:
+     # https://orgmode.org/manual/Dates-and-times.html#Dates-and-times
+     # https://orgmode.org/manual/The-date_002ftime-prompt.html
+     # https://orgmode.org/manual/Timestamps.html#Timestamps
+
+Examples            # check project emacs.d
+tab                 # fold/unfold in 3 steps, 2nd being partial
+Evil-Org Keys       # https://github.com/edwtjo/evil-org-mode
+g[hjkl]             # navigate bullets #TODO :sometimes not working #ToCheck
+M-[hjkl]            # move bullets up/down and in indent
+M-return            # create indented bullet
+org-*-export-*      # export org page to given format
+C-c or ,            # org mode menu
+, s                 # schedule
+, d                 # deadline
++1d/w/y             # repeated entry daily/weekly/yearly
+++1w                # entry is definately in future
+.+1w                # entry is 1 week forward after completion of task DONE
+shift [aerrow]      # Toggle TODO
+C-c .               # insert time stamp / date
+C-c !               # insert inactive time stamp / date
+C-c l               # org store copy link (org-store-link)
+C-c C-l             # org insert paste link (org-insert-link)
+C-c C-e             # org mode export menu
+C-c C-c h h         # org mode html export
+C-c C-c or , ,      # recompile the page
+    # in agenda menu, check/uncheck (mark) a checklist
+toggle-truncate-line # line warp or truncate
+#+TITLE: title of the document
+#+AUTHOR: name here
+#+OPTIONS: \n:t     # force line break in export, http://orgmode.org/manual/Export-settings.html
+#+TODO: TODO FEEDBACK VERIFY | DONE CANCELED
+# Org Agenda View
+, a n     # agenda view
+https://orgmode.org/guide/Agenda-commands.html
+tab       # open entry in other window
+return    # open entry in same window
+w/d       # week/day view
+f/b/./J   # forward/backword/today/jump in date
+F         # toggle Follow mode to follow entry under the curser
+t         # toggle TODO
+
+# Auto Completion
+https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Bcompletion/auto-completion
+company             # most supported auto-complete mode
+          # other plugins
+          # company-quickhelp # https://github.com/expez/company-quickhelp
+auto-complete       # second most after company
+
+
+# Tagbar
+https://www.reddit.com/r/emacs/comments/3w5exj/is_there_anything_like_tagbar_for_emacsspacemacs/
+speedbar  # advanced tagbar options, opens in separate window
+          # sr-speedbar ; plugin mode to open speedbar in buffer
+               # only file displayed not directory # solved on restart
+               # #TODO : packege got deleted after install  #Ref[1]
+               # orphan package(not in any layer) gets deleted, need to use it
+          # https://www.emacswiki.org/emacs/SpeedBar
+          # remove icons: (setq speedbar-use-images nil)
+imenu     # imenu stores all tags in buffer
+helm-semantic-or-imenu  # for semnantic need to enale layer
+spc s j   # helm-imenu; jump in buffer
+spc j [i/I] # jump helm-imenu current/all buffer #ToCheck same as above ?
+
+
+#etags vs ExuberantCtags (vim uses Ctags) vs gTags(Company??)
+https://www.emacswiki.org/emacs/BuildTags
+(1) ctags-update to auto update the TAGS files after a set interval (as you do in your auto-update-tags-when-save function).
+(2) etags-table to search only in the relevant TAGS file or files based on which file you are accessing. This package updates the tags-table-list for you automatically.
+(3) etags-select gives you options to pick from when a tag has multiple entries; really helpful.
+
+http://vim.wikia.com/wiki/Browsing_programs_with_tags (spacemacs shortcuts)
+g Ctrl-]  # find and list matching tags
+Ctrl-]    # go to tag defination
+
+Ctags:
+ctags -e -R .       # generate ctags for a folder, -e for emacs
+
+# Advanced options
+Remote file editing # TRAMP #ToExpore
+spc f f /$i3/       # /user@host:file  for remote tramp edit
+eshell/term         # terminal, eshell works better
+Calc                # calculator and convertor
+C-x C-e             # evaluate the expression at curser, and show in command
+IELM                # elisp interpretor, like eshell
+M-:   or  ":"       # eval, command line execute
+          eval-buffer
+          eval-region
+hook ??             # #TODO : #ToLearn
+projects manage     # https://github.com/anshulverma/projectile-speedbar
+git                 # magit , a git integration
+python IDE          # https://realpython.com/blog/python/emacs-the-best-python-editor/
+tdd                 # compile while saving #TOLearn
+
+
+# Calc
+q                   # exit the calculator
+calc-grab-region    # grab the highlighted region for further calculation
+V                   # all calculator menu/ options
+V R [+/-/*]         # reduce the region with the result
+(+ 2 3)
+ 2 3 5 6
+
+# narrow/number menu
+spc n       # narrow number menu
+spc n -/=   # decrement/increment numbers
+spc n </>/,/.   # page halfup/halfdown/up/down , scroll
+scp n f     # narrow to current function
+scp n w     # wide or restore back
+
+# Compile
+spc c C     # compile
+C-c C-c     # python, pass buffer to interpretor like ipython #TODO : not working here, solve
+# File Local Variables:
+https://stackoverflow.com/questions/4540793/emacs-set-compilation-command-per-buffer/4540977#4540977
+https://www.gnu.org/software/emacs/manual/html_node/emacs/Specifying-File-Variables.html#Specifying-File-Variables
+// -*- compile-command: "g++ --std=c++14 -O3 inputFile.cpp `pkg-config --cflags --libs opencv`" -*-
+local mode hook vairable: https://stackoverflow.com/questions/12756531/using-the-current-buffers-file-name-in-m-x-compile
+
+# What you need ?
+Relative Numbering  # linum-relative-mode, linum-relative-global-mode
+auto complete       # global-company-mode
+auto scale-down-font   # this command needs to automate  how ?? #ans : Install default font, and settings will be applied
+revert-buffer       # discard changes and reopen or reload file
+multipe cursor ?? https://github.com/magnars/multiple-cursors.el ??
+2 space indent, auto convert to space
+selected word search
+
+
+
+# Emacs Wiki
+
+## people on Emacs Wiki
+https://www.emacswiki.org/emacs/AndyStewart
+
+# Reference
+[1] https://github.com/syl20bnr/spacemacs/blob/master/doc/FAQ.org#why-are-packages-installed-with-package-install-automatically-deleted-by-spacemacs-when-it-boots
+          # dotspacemacs-install-packages 'used-only
+### EOF

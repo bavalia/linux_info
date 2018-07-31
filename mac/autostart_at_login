@@ -1,0 +1,27 @@
+
+http://www.macworld.com/article/2047747/take-control-of-startup-and-login-items.html
+
+launchctl list ##To see a list of all the currently loaded launch items on your Mac
+
+#Login items
+System Preferences > Users & Groups > Login Items
+
+#Startup items  ## old mathod not used now a days, but supported still.
+/Library/StartupItems
+/System/Library/StartupItems
+
+#Launch daemons and agents ##  launch daemons and agents, controlled by the launchd process
+Behind the UNIX curtain: Instead of opening apps directly, launchd loads specially formatted .plist documents (XML preference files) that specify what should launch and under what circumstances. Sometimes these launch items run constantly in the background, sometimes they run at scheduled intervals, and sometimes they run as needed—for example, in response to an event such as a change in a certain file or folder—and then quit.
+--Items in /Library/LaunchDaemons and /System/Library/LaunchDaemons load when your Mac starts up, and run as the root user.
+--Items in /Library/LaunchAgents and /System/Library/LaunchAgents load when any user logs in, and run as that user.
+--Items in /Users/your-username/Library/LaunchAgents load only when that particular user logs in, and run as that user.
+
+#Other mathods:
+--A kernel extension: Kernel extensions, or kexts, live in /System/Library/Extensions and load at startup. They provide low-level features such as processing audio and adding support for peripherals. Most kexts on your Mac are part of OS X. The safest way to remove a third-party kext is to run an uninstaller provided by the developer.
+--A cron job: Cron is a Unix scheduling utility built into OS X. The easiest way to view and edit cron jobs without using Terminal is to download the free Cronnix utility by Sven A. Schmidt.
+--A login script: Login scripts, like startup items, were used in older versions of OS X but are now deprecated.
+
+
+# dropbox automated upload
+https://github.com/andreafabrizi/Dropbox-Uploader
+

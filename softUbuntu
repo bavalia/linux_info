@@ -1,0 +1,156 @@
+update		# language support, plus default softwares
+chrome		# chrome browser
+vlc		# media player
+axel		# downloader multiple stream download
+vim 		# vi improved, text editor
+neovim  # vi reengineered, with better plugin support and lua backend
+plugin		# additional plugins in default video player
+clementine	# better music player
+ipython		# better commandline interface to python interpreter
+nmap		# port scanner
+openssh-server	# ssh server
+gparted		# partition manager
+filezilla	# to transfer files
+youtube-dl	# to download video from youtube
+lifograph	# offline private journal of life (diary)
+cheese		# take photo and video with webcam
+pidgin		# IM chat client
+
+
+###extra-installed###
+
+tmux		# terminal multiplexers
+vim-gnome	# vim graphical interface
+golly		# conway's game of life simulator
+lm-sensors	# sensors -> hddtemp,psensor
+ccsm		# compiz setting manager + plugin extra
+gufw		# firewall graphical
+tor		# secure proxy, onion router
+build-essential	# all tools for building from source code including g++
+octave		# math solution like matlab
+python-scipy	# python scipy plus numpy library
+x-chat		# irc client
+lynx		# commandline browser
+spyder		# IDE for scientific python
+geney		# IDE for c, cpp, java, php, html, python, perl, pascal
+steam		# platform independent game engine
+guake terminal	# (f12) drop-down terminal for gnome
+synapse		# (alt+space) graphical launcher for application and files
+gnome-dictionary dictd dict-gcide dict-wn dict-moby-thesaurus
+	# gnome-dictionary is client for dict, synapse has plugin for this
+	# dictd is server, dict-gcide and dict-wn are backend dictionaries, moby-thesaurus is biggest thesaurus database
+gimp		# Image Editor like photoshop
+proxychains	# proxy through multiple paths, for a particular program
+virtualbox	# to run other os as guest
+wine		# run exe file of windows
+iptux		# IP Messenger client for linux
+lyx		# latex editor , latex included
+artha		# dictionary
+eiskaltdcpp	# dc++ client
+android-tools-adb/fastboot	#android tools
+okular		# pdf annotation (better than xournal)
+pdftk     # pdf tool kit, split merge pdfs
+calibre		# ebook, pdf all in one reader
+iftop		# commandline tcp bandwidth monitor for individual process like top
+texmaker	# simple latex editor
+texlive-science	# to add algpseudocode, algorithm etc modules to latex
+latex		# scientific document creater
+emacs		# powerful commandline and graphical word editor like vim
+Qalculate/qalc	# advanced scientific calculator, basic calculator alternative
+pingus		# panguane puzzle game
+dosboxemulator	# dos emulator for dos software
+7zip		# 7zip compressor
+google-earth	# google earth
+kstars		# planetarium light weight
+celestia	# 3d real time space simulation, flyby anywhere in galaxy
+stellarium	# planetarium, more realistic, on earth view
+playonlinux	# install windows softwares and games
+sage		# magma maple mathematica matlab alternatives , computer algebra system (CAS) , includes maxima, powerful and heavy
+* arping	# *(breaks networks_manager-do not install) ping mac address, arping by Thomas Habets, requires libnet1-dev libpcap-dev
+htop		# interactive top, process monitor
+arpspoof	# man in the middle attack with arpspoofing, can also be used to force ip address over LAN
+dsniff		# sniffer and mac spoofer, arpspoof
+gdb		# command line debuger
+blueman		# advanced bluetooth app for internet sharing
+dnsmasq		# dhcp, dns server for access point
+wireshark	# network packets capture tool
+socat		# TCP port forwarder, each side bound to another local IP address (bind)
+cfv			#  cfv  -  Verify  file  consistency  with .sfv, .csv, .crc, .md5, md5sum, sha1sum, .torrent, par, or par2 files
+redshift	# Redshift adjusts the color temperature of your screen according to your surroundings. This may help your eyes hurt less. (f.lux equivalent)
+skype		# skype - video chat audio call
+dropbox		# dropbx - online folder backup
+intel-linux-graphics-installer	# intstaller to install intel graphics drivers
+ntfsprogs	# ntfsundelete to recover deleted files from ntfs partition
+wondershaper	# limit upload and download speed for an interface
+trickle		# limit upload and download speed for an application
+xclip     # copies content of file to clipboard in commandline
+teamspeak # teamspeak a VoIP client or solution for group voice chat
+tmate     # remote terminal sharing, works behind NAT too, ssh client can connect
+docear    # mendeley, zotero, reference management and brain map software, however sucks as it is wine ported in linux
+ipfs      # inter planetory file system, p2p peer distributed file system
+ethreum-wallet
+mist      # ethereum wallet browser and interface
+go        # go programming language created by google, better multi-threading
+
+
+###extra-not-installed###
+
+scrapy		# Scrapy is a fast high-level screen scraping and web crawling framework
+inkspace	# vector graphics editor
+qbittorrent	# better bittorrent client
+mayavi2		# 3D vtk file viewer
+squid		# proxy server
+draftsight	# dwg creator, viewer like autocad
+gid		# 3D drawing creator
+xournal		# pdf annotation
+macchanger	# to change mac
+vuze		# torrent client
+transmission	# torrent client
+netcat-traditional	# netcat original with extra feature
+finger		# to check currenty loged in user
+traceroute	# trace an ip
+gnome		# gnome graphical environment
+gdm		# gnome display manager
+djbdns		# light local dns cache server like(bind)
+	#-contains dnscache (cache manager), tinydns(dns forwarder, though not used now a days cos dnscache can also forward with little config)
+dnscache-run	# to configure dnscache in djbdns
+svc		# djbdns service runner, part of daemontools for djbdns
+bind		# powerful local dns server and cache manager
+socat		# binds socat b/w two connection
+scilab		# math solution like matlab
+ntop		# graphical bandwith monitor for individual process. like top
+wxmaxima	# maple and matematica alternative, symbolic calculator , CAS
+mathics		# light weight matematica alternative, CAS, python based, backed by sympy optionally sage
+hostapd		# create wireless wifi access point AP, http://forum.xda-developers.com/showthread.php?t=2009381
+sshfs		# mounting filesystem via ssh
+logkeys # capture and store keys pressed on keyboard, /var/log/logkeys.log
+screen    # virtual terminal, which persists connection even after ssh terminal closes, detach process from terminal
+     # ctrl+a d     # detach from the screen , https://remysharp.com/2015/04/27/screen
+     # screen -rd   # resume or reattach with screen, detaching if any other attachment
+     # screen -rx   # attach screen without detaching other, create multiple window of same screen
+synergy # control multiple computers and screen with single mouse keyboard
+
+paraview # data analysis and visualization software, opensource, python based
+unity3D   # game, simulator engine https://forum.unity.com/threads/unity-on-linux-release-notes-and-known-issues.350256/
+unison  # File synchronization tool, graphical as well as terminal
+    # cross platform, windows, bi-directional sync
+osync   # File synchronization tool, with biderectional sync
+    # built on top of rsync, cron or triggered on file changes in daemon mode
+    # https://github.com/deajan/osync
+    # comparision with unison: https://github.com/deajan/osync/issues/86
+      # latest, works if system has bash and rsync
+sshfs   # fuse filesystem to mount remote folder over ssh on local machinew
+
+
+
+Scientific Linux
+https://help.ubuntu.com/community/UbuntuScience
+https://www.scientificlinux.org/
+http://www.caelinux.com/CMS/
+
+
+link for 13.04 ubuntu tweek
+http://www.noobslab.com/2013/04/tweaksthings-to-do-after-install-of.html
+
+synapse and dictionary info
+http://cristalinux.blogspot.in/2010/12/synapse-and-bit-about-gnome-dictionary.html

@@ -1,0 +1,48 @@
+# http://vim.wikia.com/wiki/Making_a_list_of_numbers
+#
+put       # puts a string in next line
+range     # generates a range of nubers
+:put =range(11,15)
+11
+12
+13
+14
+15
+:123put =range(11,15)
+# puts numbers after line number 123, 0put at beginning, $put at end of documents
+
+for       # for loop
+:for i in range(1,10) | put ='192.168.0.'.i | endfor
+192.168.0.1
+192.168.0.2
+192.168.0.3
+192.168.0.4
+192.168.0.5
+192.168.0.6
+192.168.0.7
+192.168.0.8
+192.168.0.9
+192.168.0.10
+
+:put =map(range(1,5), 'printf(''%04d'', v:val)')
+0001
+0002
+0003
+0004
+0005
+
+:let @a=1 | %s/abc/\='xyz_'.(@a+setreg('a',@a+1))/g
+# replaces each abc with xyz_N, with increasing N with every occurance
+let @a=1  # sets the register a to a value
+setreg('a', @a+1) # sets the register with a command
+\=        # string phrase to be evaluated 
+
+CTRL+a    # increase first number of selected lines, of word
+g CTRL+a  # increment in a sequence the first number of every line
+my_array[1] = 0;
+my_array[2] = 0;
+my_array[3] = 0;
+my_array[4] = 0;
+my_array[5] = 0;
+my_array[6] = 0;
+my_array[7] = 0;

@@ -1,0 +1,107 @@
+update		# language support, plus default softwares
+chrome		# chrome browser
+vlc		# media player
+axel		# downloader mutliple stream download
+vim 		# vi improved, text editer
+plugin		# additional plugins in default video player
+clementine	# better music player
+ipython		# better commandline interface to python interpreter
+nmap		# port scaner
+openssh-server	# ssh server
+gparted		# partition manager
+filezilla	# to transfer files
+youtube-dl	# to download video from youtube
+lifograph	# offline private journal of life (diary)
+
+###extra-installed###
+
+golly		# conway's game of life simulator
+lm-sensors	# sensors -> hddtemp,psensor
+ccsm		# compiz setting manager + plugin extra
+gufw		# firewall graphical
+tor		# secure proxy, onion router
+build-essential	# all tools for building from source code including g++
+octave		# math solution like matlab
+python-scipy	# python scipy plus numpy library
+x-chat		# irc client
+pidgin		# IM chat client
+lynx		# commandline browser
+spyder		# IDE for scintific python
+geney		# IDE for c, cpp, java, php, html, python, perl, pascal
+steam		# platform independent game engine
+guake terminal	# (f12) drop-down terminal for gnome
+synapse		# (alt+space) graphical launcher for application and files
+gnome-dictionary dictd dict-gcide dict-wn dict-moby-thesaurus
+	# gnome-dictionary is client for dict, synapse has plugin for this
+	# dictd is server, dict-gcide and dict-wn are backend for dict server, moby-thesaurus is biggest thesaurus database
+gimp		# Image Editor like photoshop
+proxychains	# proxy through multiple paths, for a perticular program
+virtualbox	# to run other os as guest
+wine		# run exe file of windows
+iptux		# IP Messenger client for linux
+lyx		# latex editer , latex included
+artha		# dicti.onary
+eiskaltdcpp	# dc++ client
+android-tools-adb/fastboot	#android tools
+okular		# pdf annotation (better than xournal)
+iftop		# commandline tcp bandwidth monitor for individual process like top
+texmaker	# simple latex editor 
+latex		# scientific document creater
+emacs		# powerful commandline and graphical word editor like vim
+Qalculate	# advanced scintific calculator, basic calculator alternative
+pingus		# panguane puzzle game
+dosboxemulator	# dos emulator for dos software
+7zip		# 7zip compresser
+
+
+###extra-not-installed###
+
+qbittorrent	# better bittorrent client
+mayavi2		# 3D vtk file viewer
+squid		# proxy server
+draftsight	# dwg creater, viewer like autocad
+gid		# 3D drawing creater
+xournal		# pdf annotation
+macchanger	# to change mac
+vuze		# torrent client
+transmission	# torrent client
+gdb		# command line debuger
+netcat-traditional	# netcat origional with extra feture
+finger		# to check currenty loged in user
+traceroute	# trace an ip
+gnome		# gnome graphycal environment
+gdm		# gnome display manager
+dsniff		# sniffer and mac spoofer
+djbdns		# light local dns cache server like(bind)
+	#-contains dnscache (cache manager), tinydns(dns forworder, though not used now a days cos dnscache can also forword with little config)
+dnscache-run	# to configure dnscache in djbdns
+svc		# djbdns service runner, part of daemontools for djbdns
+bind		# powerfull local dns server and cache manager
+socat		# binds socat b/w two connection
+scilab		# math solution like matlab
+sage		# magma maple mathematica matlab alternatioves , computer algebra system (CAS) , includes maxima, powerful and heavy
+ntop		# graphical bandwith monitor for individual process. like top
+wxmaxima	# maple and matematica alternative, symbolic calculator , CAS
+mathics		# light weight matematica alternative, CAS, python based, backed by sympy optionaly sage
+google-earth	# google earth
+kstars		# planetarium light weight
+celestia	# 3d real time space simulation
+stellarium	# planetarium, more realistic 
+playonlinux	# install windows softwares and games
+
+
+
+Scintific linux
+https://help.ubuntu.com/community/UbuntuScience
+https://www.scientificlinux.org/
+http://www.caelinux.com/CMS/
+
+
+link for 13.04 ubuntu tweek
+http://www.noobslab.com/2013/04/tweaksthings-to-do-after-install-of.html
+
+synapse and dictionary info
+http://cristalinux.blogspot.in/2010/12/synapse-and-bit-about-gnome-dictionary.html
+
+
+

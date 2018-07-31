@@ -1,0 +1,245 @@
+default tor DNSPort=9053
+default tor Port=9050
+default DNS Port=53
+
+Tor config file = /etc/tor/torrc
+DHCP config file = /etc/dhcp/dhclient.conf
+		or = /etc/dhcp3/dhclient.conf
+dnsmasq.conf (/etc/dnsmasq.conf)
+DNS server ip = /etc/resolve.conf
+#dnscache dir = /etc/dnscache/
+#dnscache /service dir = /etc/service/
+
+#------------pre-requisite--------------------------------------------------
+
+install tor, dnsmasq
+
+#-----------edit-dnsmasq.conf (/etc/dnsmasq.conf)---------------------
+
+#tor
+server=192.168.121.14
+server=192.168.121.12
+server=127.0.0.1#9053
+#server=127.0.0.1
+
+#listen-address=127.0.1.1
+listen-address=127.0.0.1
+  
+interface=eth0
+
+cache-size=4096
+
+# edit end
+
+#---------edit- torrc (/etc/tor/torrc)---------------------------------
+
+# tor dns setup
+DNSPort 9053
+#DNSPort 53
+AutomapHostsOnResolve 1
+AutomapHostsSuffixes .exit,.onion
+
+#EOF
+
+#---------dhclient.conf (/etc/dhcp/dhclient.conf)-------------------------
+
+prepend domain-name-servers 127.0.0.1;
+
+#EOF
+
+#------------end of edit -------- restart tor, dnsmasq -------------------
+
+
+
+
+#-----------old file (old method, before dnsmasq)-------------------------------------------------------
+
+reading documents link:
+link1# for basic understanding of cocepts of tor DNS quary, DNS config , DHCP, and link to other doc.  #must read
+https://techstdout.boum.org/TorDns/
+
+link2# dnscache setup though not for perticularly ubuntu
+http://cr.yp.to/djbdns/run-cache-home.html
+http://cr.yp.to/djbdns/dnscache.html
+
+link3# Setup djbdns (dnscache) on ubuntu guide, though old
+http://www.lueckdatasystems.com/HOW-TO_Basic_installation_of_Daniel_J_Bernstein_djbdns_TinyDNS_on_Ubuntu_Linux
+
+#---------------------------------------------------------------------
+
+
+# GUIDE TO TORIFY DNS QUARIES...in UBUNTU 12.04...using...DNSCACHE, TOR DNS forworder
+
+#---------------------------------------------------------------------
+
+
+-by torifing DNS quaries, we can unblock websites blocked by DNS servers.
+
+-concepts
+	-basicaly we resolve DNS quaries by redirecting it to TOR TCP proxy , so we get origional ip address, rather than modified by ISP DNS servers.
+	-also prevents dns leaks in torifiying other application..
+
+
+-basic requirement : fully establised tor connection, root permission
+		- reading of link 1#
+
+
+
+
+#---------setup-------DNSCACHE---------
+
+# first we configure local dnscache server 
+
+	-as all DNS queries through TOR can slowdown browsing experience, we save queries as cache on local pc to reuse.
+	-and pass only those queries through TOR we want to torify.
+	-though dnscache can forward DNS queries to other root dns servers , which might unblock sites sometimes. 
+	-if not, and forworded queries by udp 53 port, modified in way,
+	-we forword it to TOR DNS server on localhost and send as TCP via TOR network.
+
+
+-djbdns has other component 'tinydns' for more DNS forwarding options,
+but here we do not require it...
+ 
+-so we install djbdns package, to install dnscache , and make as service
+-and configure dnscache by installing dnscache-run
+
+------1
+$ sudo apt-get install djbdns dnscache-run
+
+$ sudo reboot
+------
+
+-to check dnscache is running properly
+-----
+$ sudo svstat /etc/service/dnscache
+or
+$ sudo netstat -upl
+-----
+by netstat look for port 53 or domain , and service name dnscache
+
+
+-to stop(down) and start(up) dnscache service , #by default automatic stats
+-svc is part of daemontools in djbdns,for service management. 
+------
+$ sudo svc -d /etc/service/dnscache
+$ sudo svc -u /etc/service/dnscache
+------
+
+-now to configure dnscache service...
+we need to do changes in default dnscache dorectory i.e /etc/dnscache/
+
+-$FORWARDONLY  is  set, so dnscache treat ./root/servers/@ as a list of IP addresses for other caches, not root servers.
+------2
+$ sudo echo 1 > /etc/dnscache/env/FORWARDONLY
+------
+-edit file manualy if does not work...
+
+-we are setting dnscache on 127.0.0.2:udp-53 , as dnscache doesn't have better port changing options...by default it uses UDP-53
+-and later we will set TOR DNS service on 127.0.0.1:udp-53 , to avoid this overlap.
+-----3
+$ sudo echo '127.0.0.2' > /etc/dnscache/env/IP
+------
+
+-if you want to provide this dnscache service to others in network.
+ change 127.0.0.2 with host-ip address.
+-and add range of ip address file to which you want to provide service 
+ in ./root/ip/
+-e.g if you want for 192.168.0.1/16 create file ./root/ip/192.168
+-for 192.168.0.1/24 create file ./root/ip/192.168.0
+
+
+-now if you want add other dns servers,
+ you can add its ip to file ./root/servers/@
+-by default any ip from file ./root/servers/@ is used to resolve DNS queries, if no other Query forwarding rule matches.
+- now let if you want to use different dns servers for ip range 192.168.0.1/24
+ add those dns servers to file ./root/servers/0.168.192.in-addr.arpa
+- and if you want different dns servers for all domain e.g anything.google.com
+ add those to file ./root/servers/google.com
+
+-here for example we are trofying only facebook queries , by forwarding through
+ TOR DNS service running on 127.0.0.1:UDP-53 , so
+-----4
+$ sudo echo '127.0.0.1' > /etc/dnscache/root/servers/facebook.com
+------
+
+-now after adding all forwarding rules in ./root/servers/
+restart dnscache service
+-now check to see if our dnscache service runs properly use dig command
+------
+$ dig @127.0.0.2 -p 53 abc.com
+------
+
+
+
+------------------configure--------TOR DNS forwarder service-------
+
+
+-new version of tor provides TOR DNS service in tor package ...
+-just needs to unable it by adding below lines to file 'torrc'
+-----5
+$ sudo vim /etc/tor/torrc
+------
+------add lines
+DNSPort 53
+AutomapHostsOnResolve 1
+AutomapHostsSuffixes .exit,.onion
+------
+-here port 53 can be changed, by default is 9053 for TOR DNS
+
+-now restart tor, and wait for some time to establish tor network.
+-use below if installed on distro.
+------6
+$ sudo service tor -restart
+------
+
+
+-now check if TOR DNS service is running...and resolving ip
+------
+$ sudo netstat -ulp
+$ dig @127.0.0.1 -p 53 abc.com
+------
+-look for UDP-53 or domain on localhost, service tor ,in netstat
+
+
+-------------configure-------resolve.conf, dhclient.conf
+
+-now dnscache, tor DNS service running 
+ we want to use it as default dns resolver...
+
+
+-we can add ip of dnscache nameserver in resolve.conf, 
+ but resolve.conf is modified whenever we connect to a network by dhcp
+
+-so we will configure dhcp cliant file by adding following line in 
+ dhclient.conf
+------7
+$ sudo vim /etc/dhcp/dhclient.config
+------
+------add lines
+prepend domain-name-servers 127.0.0.2;
+supersede domain-name "localdomain";
+------
+-you can use 'supersede' to overwrite dhcp information, instead prepend
+
+-now reconnect to network...
+-and cat /etc/resolve.conf to see if it is modified properly
+
+-----------------END--------------------
+
+
+-congratulation you have torified DNS queries....
+-you can check by dig command...
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+

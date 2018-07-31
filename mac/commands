@@ -1,0 +1,17 @@
+
+#links
+http://www.mitchchn.me/2014/os-x-terminal/
+
+
+# virtualenvwarpper
+mkvirtualenv	# create new python virtual environment
+workon		# workon specific virtual environment
+. ~/.virtualenvs/flaskvenv/bin/activate	# workon alternative, to activate virtual environment
+deactivate	# deactivate virtual environment
+open		# -a select app to open with, -e open in text editor, open any file with default app, open a directory
+pbcopy		# copy text from commandline, eg. ls ./ | pbcopy
+pbpaste		# paste text from pbcopy in commandline
+mdfind		# to search for files on mac, using spotlight search, eg. $ mdfind -onlyin ~/Documents essay
+launchctl	# automate/autostart any service or app, similar to cron jobs
+say			# convert text to speech, can be saved to audio file, $ say -f mynovel.txt -o myaudiobook.aiff
+

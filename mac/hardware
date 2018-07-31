@@ -1,0 +1,6 @@
+
+# en0 mac address (wireless)
+# ether a4:5e:60:ce:4c:4b
+
+# spoof 
+# sudo ifconfig en0 ether 00:e2:e3:e4:e5:e6

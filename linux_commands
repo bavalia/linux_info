@@ -1,0 +1,170 @@
+# useful commands, for linux, ubuntu
+http://ryanstutorials.net/linuxtutorial/cheatsheet.php
+
+avconv		# default tool to convert file from one format to other, also select any video or audio stream to output file
+		#eg. avconv -i input.mkv -codec copy -map 0:v -map 0:a:0 output.mp4
+ffmpeg    # ffmpeg -i source.mp4 -c:v libx264 -ar 22050 -crf 28 destinationfile.flv
+ffmpeg -i Video.mpg Pictures%d.png # extract images from video
+python -mSimpleHTTPServer xxxx
+		#(xxxx- port number) to start HTTP Server at current working directory.
+
+vim	split, vsplit	#split horizontally or vertically
+	<Ctrl>+w (navigation key)	#to navigate through splited window
+vim/vimdiff/rvim/rview/vi/view/ex
+:%!		#execute command from vim with file content as standard input, eg :%xxd to edit as hex
+:MRU		#recent file history, requires plugin mru.vim
+z=		#to correct misspelled words
+:e		#delete .swp file after recoverd and saved.
+ctrl+n	# autocomplete words
+plug  #install plug plugins, see https://github.com/sdadia/dotfiles/blob/master/latest_vimrc
+
+emacs -nw	#emacs -no window, only command line editor like vim
+
+find -name 'temp*'	# find all file from current directory onwards matching string temp[*].
+find -size +100M	# find all file with greater than 100MB
+
+update-rc.d	#install and remove System-V style init script links, startup configuratin change. :
+netstat -pnl		#network state, eg. listening port, connected port, udp, tcp, process associated with port etc..
+netstat_unix  # find other end of connected sockets https://github.com/lemonsqueeze/unix_sockets_peers, perl script
+cd -		#go to the previous directory
+uname -a	#linux info
+sdcv		#dictionary
+dict		#dictionary
+curl		#curl web page
+grep		#grep key word from any file
+grep -r -i word ./	#grep key word from any file in current directory onwards, ignore case.
+df		#partition info
+du -h		#directory size recursively , -a includes files, -S excluding sub directories,
+netcfg		#net info in android
+dconf-editer	#configuration editor for Ubuntu
+xxd		#generate hex dump for file and reverse
+ls -la -t -r	#sort by time (-t) and reverse order (-r)
+gnome-open 	#opens file in its default programme from terminal
+xdg-open	#same as above
+nohup		#nohup - run a command immune to hangups, with output to a non-tty
+nslookup	# dns resolution
+dig			# dns resolution
+xclip -sel clip < ~/.ssh/id_rsa.pub  # copy file content to clipboard
+notify-send "Title" "message"  # notify on windows with given message and title
+ntfsfix /dev/sdXY  # fix/delete windows hybernation lock and files on ntfs partition
+rsync -avz --delete Source Destination
+      # -a archive mode, -rlptgoD (no -H,-A,-X), preserve file attribute
+      # -v verbose
+      # -z compress
+      # -u update, skip if destination folder has newer file
+      # --delete : delete files in Destination which are not in Source
+      # for bi-drectional sync use other tools
+crontab -e  # to make a process scheduled to run on defined interval
+anacron     # like cron but triggers after trigger time is passed when pc powers on next time, good for daily, monthly task
+udev/rules  # trigger any script when specific hardware is connected
+      # use for external hard drive HDD automatic backup sync
+      # https://hackaday.com/2009/09/18/how-to-write-udev-rules/
+
+
+
+# recover root password using single user, edit grub2 by pressing 'e',select line starting with 'linux',add following words, then boot by pressing 'b' or 'F10'
+1
+S
+Single
+single				# single user mode
+init=/bin/bash		# ubuntu 12 and later
+
+# wget website download , simple crawler , http://www.kossboss.com/linux---wget-full-website
+nohup wget --limit-rate=200k --no-clobber --convert-links --random-wait -r -p -E -e robots=off -U mozilla http://www.kossboss.com &
+
+# http folder download, https://stackoverflow.com/questions/23446635/how-to-download-http-directory-with-all-files-and-sub-directories-as-they-appear
+wget -r -np -nH --cut-dirs=3 -R index.html* http://hostname/aaa/bbb/ccc/ddd/
+
+### Tunneling
+#https://unix.stackexchange.com/questions/10428/simple-way-to-create-a-tunnel-from-one-local-port-to-another
+
+# socat,(tunneling) forward dns query to nonstandard port like tor-DNS 9053
+#socat udp4-listen:53,bind=127.0.0.5,fork udp4-sendto:127.0.0.1:9053 #listen leaves port open, not for udp
+#socat udp4-listen:53,bind=127.0.0.5,fork udp4-connect:127.0.0.1:9053 #connect leaves port open, not for udp
+sudo socat udp4-recvfrom:53,bind=127.0.0.5,fork udp4-sendto:127.0.0.1:9053 # no continuous connection, ideal for udp
+
+socat tcp-listen:8001,reuseaddr,fork tcp:localhost:8000  # forward query on socket 8001 to localhost:8000
+
+# ssh tunnel, e.g for vnc (vino-server) data tunnel over more secure ssh
+ssh -L 5900:localhost:5900 user@ssh-server	# from client 5900 to tunnel via ssh-server to destination localhost:5900  -local tunneling
+ssh -R 5900:localhost:5900 user@friend-pc	# from friend 5900 to tunnel via my-pc to destination localhost:5900  -remote tunneling
+ssh -g -L 8001:localhost:22 -f -N user@remote-server.com #make remote server's local port 22 accessible to local network on port 8001
+          # -g : port is accesible to everyone on network, unlike just localhost without it
+          # -N : means all I am doing is forwarding ports, don't start a shell
+          # -f : means fork into background after a successful SSH connection and log-in
+
+#Netcat
+nc -l -p 8001 -c "nc remote-server port"  # listen on port 8001 and forward it to command, command can be shell(/bin/bash) also
+          # -c : execute command, works on netcat traditional only
+
+#fifo queue pipeline, port forwarding
+mkfifo a
+mkfifo b
+nc 127.0.0.1 8000 < b > a &
+nc -l 8001 < a > b &
+
+
+# Jupyter notebook python remote access
+jupyter notebook --no-browser --port=8889  # execute on remote server
+ssh -N -f -L localhost:8888:localhost:8889 username@your_remote_host_name  # on local machine
+
+# remove old linux kernels
+dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | xargs sudo apt-get purge
+dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | xargs sudo apt-get purge
+
+
+
+#bash command auto cemplete from history  edit to file ~/.inputrc
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\e[C": forward-char
+"\e[D": backward-char
+
+
+#http://www.gregreda.com/2013/07/15/unix-commands-for-data-science/
+
+#awk : Imagine you have a 4.2GB CSV file. It has over 12 million records and 50 columns. All you need from this file is the sum of all values in one particular column.
+awk -F "|" '{ sum += $4 } END { printf "%.2f\n", sum }' data.csv
+
+#head and tail
+head -n 3 data.csv
+tail -n 3 data.csv
+
+# wc (word count) - counts lines, word, bytes
+wc data.csv
+
+# grep : There's an assortment of extra parameters you can use with grep, but the ones I tend to use the most are -i (ignore case), -r (recursively search directories), -B N (N lines before), -A N (N lines after).
+grep -i -B 1 -A 1 steal data.csv
+
+# grep : operators, '.' is used to match any single charactor like '?' in bash, '*' is used to repeat provious character zero or more time, so to search string with word abc followed by xyz
+grep "abc.*xyz"
+
+
+#sed : find and replace magic on a very large file
+sed -e 's/Block/Rejection/g' data.csv > rejection.csv
+# replace all instances of the word 'Block' in data.csv with 'Rejection'
+
+#sort and uniq
+#Sort outputs the lines of a file in order based on a column key using the -k parameter. If a key isn't specified, sort will treat each line as a concatenated string and sort based on the values of the first column. The -n and -r parameters allow you to sort numerically and in reverse order, respectively.
+head -n 5 data.csv | sort  #or
+# columns separated by '|', sort on column 2 (-k2), case insensitive (-f)
+head -n 5 data.csv | sort -f -t'|' -k2
+
+#Sometimes you want to check for duplicate records in a large text file - that's when uniq comes in handy. By using the -c parameter, uniq will output the count of occurrences along with the line. You can also use the -d and -u parameters to output only duplicated or unique records.
+sort data.csv | uniq -c | sort -nr | head -n 7
+sort data.csv | uniq -d
+
+#Disabel Chrome scroll zoom
+#Install compizconfig settings manager
+#Search for #Commands
+#Add Command for any shortcut keyboard or mouse key press
+xev # find which keyboard/mouse key is pressed
+#scroll up/down keys = mouse 4/5
+
+# create wireless wifi access point AP in ubuntu. using hostapd and dnsmasq
+# http://forum.xda-developers.com/showthread.php?t=2009381
+# http://www.webupd8.org/2013/06/how-to-set-up-wireless-hotspot-access.html
+
+
+
+#---end---

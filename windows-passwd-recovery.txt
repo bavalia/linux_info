@@ -1,0 +1,20 @@
+
+### windows 7 password recovery
+form link: 
+http://pcsupport.about.com/od/windows7/ss/windows-7-password-reset-walkthrough_18.htm
+http://pcsupport.about.com/od/windows7/f/forgot-password-windows-7.htm
+ 
+
+ - boot form bootable/live windows cd, and start cmd
+ - copy d:\windows\system32\utilman.exe  d:\
+ - copy d:\windows\system32\cmd.exe  d:\windows\system32\utilman.exe   # to overwrite the above file
+ - remove the live cd and restart to boot from hdd windows 
+ - from login screen, from Ease of Access start utilman(here cmd)
+ - execute net user command "net user username password" here 'password' is new password for 'username', use "net user" to list all users 
+ - now close cmd and login from window
+ - boot from bootable cd and start cmd
+ - copy d:\utilman.exe d:\windows\system32\utilman.exe
+ - reboot to hdd as normal 
+
+
+

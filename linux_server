@@ -1,0 +1,22 @@
+
+#vpn
+  # vpncloud.rs #also open source
+    # https://medium.com/@matteocontrini/how-to-setup-a-peer-to-peer-fully-meshed-vpn-between-servers-249a9071e714
+    # https://github.com/dswd/vpncloud.rs
+  # cjdns 
+    # https://github.com/cjdelisle/cjdns
+#open-vpn
+  # server-client setup: https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-18-04
+    # openvpn server
+    # openvpn certificate authority
+    # openvpn client keys, config file generation
+    # commands to add new client or Use script ~/client-configs/addClient.sh [clientName]
+      # ./easyrsa gen-req client1 nopass
+      # cp pki/private/client1.key ~/client-configs/keys/
+      # ./easyrsa sign-req client client1
+      # cp pki/issued/client1.crt ~/client-configs/keys/
+      # cd ~/client-configs # ./make_config.sh client1
+      # scp ~/client-configs/files/client1.ovpn   toClientComputer
+  # client service setup: https://askubuntu.com/questions/229800/how-to-auto-start-openvpn-client-on-ubuntu-cli 
+    # setup route for the network: https://askubuntu.com/questions/612840/adding-route-on-client-using-openvpn
+    # or edit server.conf to push route to clients, check ccd client specific config in server.conf

@@ -1,0 +1,64 @@
+################################## Define ######################################
+
+## command prompt $PS1 variable, \t=time, \W=working directory, \h=hostname, \u=username, Default PS1="\h:\W \u\$ "
+#export PS1='\u \t \W \$ '
+## shortened direcotry name display
+#export PS1='$(echo $(dirname \w)|sed -e "s;\(/.\)[^/]*;\1;g")/$(basename \w) $ '
+
+#export PS1='\u \t $(echo $(dirname \w)|sed -e "s;\(/\.\?.\)[^/]*;\1;g")/$(basename \w) $ ' #working
+#export PS1='\u \t $(echo $(dirname \w)|sed -e "s;\(/\.\?.\)[^/]*;\1;g" -e "s;^/h/p;~;")/\W\$ ' #working
+export PS1='\u \t $(echo $(dirname \w)|sed -e "s;\(/\.\?.\)[^/]*;\1;g" -e "s;^/h/.\?;~;")/\W\$ ' #working any user
+
+export i3='swaayatt@i3'
+export pi='swaayatt@pi'
+################################## Alias #######################################
+
+alias axel='axel -an 8'
+alias axeln='axel -an'
+alias axel8='axel -an 8'
+
+alias open='gnome-open'
+alias duf='du -hd 1'
+alias df='df -h'
+alias top='htop'
+alias wget='wget -c'
+#alias wgetd='wget -c -r --random-wait -np -nH -R index.html* -P . --cut-dirs=4 -D xkcd.com,amazon.aws.com'
+alias wgetd='wget -c -r --random-wait -np -nH -R index.html* -P .'
+alias untar='tar -xvzf'
+alias upgrade='sudo apt update && sudo apt -y full-upgrade && sudo apt -y autoremove && sudo apt -y autoclean'
+alias clip="xclip -selection clipboard"
+
+alias server='python -m SimpleHTTPServer'
+
+alias envRobo='source activate Robo'
+alias envP3='. activate root'
+alias envRos='. /opt/ros/kinetic/setup.bash; . /home/patel/catkin_ws/devel/setup.bash'
+
+############################# Function Alias ###################################
+
+# compile and run
+cnr() {
+  echo "g++ --std=c++14 -O3 ""$@"" && ./a.out"
+  g++ --std=c++14 -O3 "$@" && ./a.out
+}
+
+cvcc() {
+  g++ --std=c++14 -O3 "$1" `pkg-config --cflags --libs opencv` "${@:2}" && ./a.out
+  #echo --std=c++14 -O3 -c "$1" `pkg-config --cflags --libs opencv` "${@:2}"
+  # pass the arguments as parameters to function
+}
+alias cvcnr='cvcc'
+
+# emacs shortcut command to start a server and open a frame in client
+e() {
+  emacsclient -n -e "(if (> (length (frame-list)) 1) 't)" 2> /dev/null | grep t &> /dev/null
+
+  if [ "$?" -eq "1" ]; then
+    emacsclient -a "" -nqc "$@" &> /dev/null
+  else
+    emacsclient -nq "$@" &> /dev/null
+  fi
+}
+alias ec='emacsclient -a "" -nw "$@"'
+
+################################## END #########################################
